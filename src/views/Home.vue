@@ -1,15 +1,9 @@
 <template>
-    <a-layout>
-        <a-layout-header></a-layout-header>
-        <a-layout-content class="content-wrapper">
-            <a-card title="template">
-                <a-card-grid style="width: 25%; text-align: center">base-element-table</a-card-grid>
-                <a-card-grid style="width: 25%; text-align: center">base-element-table</a-card-grid>
-                <a-card-grid style="width: 25%; text-align: center">base-element-table</a-card-grid>
-            </a-card>
-        </a-layout-content>
-        <a-layout-footer style="text-align: center">Ant Design ©2018 Created by Ant UED</a-layout-footer>
-    </a-layout>
+    <a-card title="供应链template">
+        <a-card-grid class="item-wrapper">
+            <router-link to="about">base-element-table</router-link>
+        </a-card-grid>
+    </a-card>
 </template>
 
 <script lang="ts">
@@ -22,7 +16,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.content-wrapper {
-    min-height: calc(100vh - 70px - 64px);
+.item-wrapper {
+    width: 25%;
+    text-align: center;
 }
 </style>
