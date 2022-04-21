@@ -1,7 +1,7 @@
 <template>
     <a-card title="供应链template">
         <a-card-grid class="item-wrapper">
-            <router-link to="about">base-element-table</router-link>
+            <router-link to="supplyChainBaseElementTable">base-element-table</router-link>
         </a-card-grid>
     </a-card>
 </template>
