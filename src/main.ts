@@ -1,7 +1,7 @@
 /*
  * @Author: LiChaoJun
  * @Date: 2022-04-18 11:13:31
- * @LastEditTime: 2022-04-20 15:28:22
+ * @LastEditTime: 2022-04-22 10:55:08
  * @LastEditors: LiChaoJun
  * @Description: main
  */
@@ -12,6 +12,7 @@ import store from './store';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import components from '@/layout/index';
+import '@/assets/styles/common.css';
 
 import 'highlight.js/styles/atom-one-light.css';
 import 'highlight.js/lib/common';
