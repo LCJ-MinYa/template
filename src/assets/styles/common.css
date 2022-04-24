@@ -1,3 +1,34 @@
 .container {
     padding: 20px;
 }
+
+pre {
+    position: relative;
+    min-width: 600px;
+    margin: 0;
+}
+.hljs {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    color: #abb2bf;
+    font-weight: 200;
+    font-size: 0.85rem;
+    font-family: Menlo, Monaco, Consolas, Courier, monospace;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    border: 0;
+}
+.hljs ol {
+    margin: 0 0 0 35px;
+    padding: 0;
+    list-style-type: decimal;
+}
+.hljs ol li {
+    padding-left: 10px;
+    color: #abb2bf;
+    white-space: pre;
+    list-style-position: outside;
+    border-left: 1px solid #c5c5c5;
+}

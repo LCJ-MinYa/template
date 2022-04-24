@@ -1,7 +1,7 @@
 <!--
  * @Author: LiChaoJun
  * @Date: 2022-04-18 11:13:31
- * @LastEditTime: 2022-04-22 15:24:05
+ * @LastEditTime: 2022-04-24 17:11:57
  * @LastEditors: LiChaoJun
  * @Description: baseElementTable模板
 -->
@@ -33,7 +33,9 @@
                 </a-col>
             </a-row>
         </a-form>
-        <highlightjs :code="code" />
+        <pre v-highlight>
+            <code class="javascript">{{ code }}</code>
+        </pre>
     </a-card>
 </template>
 

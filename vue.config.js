@@ -1,7 +1,7 @@
 /*
  * @Author: LiChaoJun
  * @Date: 2022-04-18 18:00:49
- * @LastEditTime: 2022-04-22 15:31:48
+ * @LastEditTime: 2022-04-24 17:39:16
  * @LastEditors: LiChaoJun
  * @Description: vue.config.js
  */
