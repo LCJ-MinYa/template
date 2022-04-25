@@ -1,7 +1,4 @@
-.container {
-    padding: 20px;
-}
-
+/* 显示行号css */
 pre {
     position: relative;
     min-width: 600px;
@@ -31,4 +28,12 @@ pre {
     white-space: pre;
     list-style-position: outside;
     border-left: 1px solid #c5c5c5;
+}
+
+/* 全局css */
+.container {
+    padding: 20px;
+}
+.margin-bottom-20 {
+    margin-bottom: 20px;
 }
