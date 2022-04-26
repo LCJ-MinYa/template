@@ -1,12 +1,12 @@
 /*
  * @Author: LiChaoJun
  * @Date: 2022-04-20 17:38:17
- * @LastEditTime: 2022-04-25 15:23:24
+ * @LastEditTime: 2022-04-26 17:20:30
  * @LastEditors: LiChaoJun
  * @Description: 模板string
  */
 import { replaceEmptyLine } from '@/utils/util';
-interface BaseElementTableConfigForm {
+interface BasicForm {
     ref?: string;
     search?: boolean;
     alignCenter?: boolean;
@@ -20,8 +20,11 @@ interface ColumnsForm extends anyObjectType {
     width: string;
 }
 
-const baseElementTableString = (formState: BaseElementTableConfigForm): string => {
-    const { ref, search, formatterValue, alignCenter, showSerialNumber } = formState;
+const baseElementTableString = (basicForm: BasicForm): string => {
+    if (!basicForm) {
+        return '';
+    }
+    const { ref, search, formatterValue, alignCenter, showSerialNumber } = basicForm;
     const str = `\
 <template>
     <base-element-table
@@ -37,4 +40,4 @@ const baseElementTableString = (formState: BaseElementTableConfigForm): string =
     return replaceEmptyLine(str);
 };
 
-export { baseElementTableString, BaseElementTableConfigForm, ColumnsForm };
+export { baseElementTableString, BasicForm, ColumnsForm };

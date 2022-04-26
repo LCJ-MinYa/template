@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/supplyChainBaseElementTable',
         name: 'supplyChainBaseElementTable',
-        component: () => import('../views/supplyChain/baseElementTable.vue'),
+        component: () => import('../views/supplyChain/baseElementTable/index.vue'),
     },
 ];
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: LiChaoJun
  * @Date: 2022-04-18 11:13:31
- * @LastEditTime: 2022-04-25 15:45:08
+ * @LastEditTime: 2022-04-26 17:31:14
  * @LastEditors: LiChaoJun
  * @Description: baseElementTable模板
 -->
@@ -9,35 +9,37 @@
     <a-card>
         <a-card title="基本信息" class="margin-bottom-20">
             <a-form
+                name="basicForm"
+                autocomplete="off"
                 :label-col="{ span: 6 }"
                 :wrapper-col="{ span: 18, offset: 0 }"
-                :model="formState"
-                :rules="formRules"
+                :model="basicFormState"
+                :rules="basicFormRules"
             >
                 <a-row :gutter="20">
                     <a-col :span="8">
                         <a-form-item label="组件引用名称" name="ref">
-                            <a-input v-model:value="formState.ref" placeholder="请输入组件引用名称" />
+                            <a-input v-model:value="basicFormState.ref" placeholder="请输入组件引用名称" />
                         </a-form-item>
                     </a-col>
                     <a-col :span="8">
                         <a-form-item label="显示搜索" name="search">
-                            <a-switch v-model:checked="formState.search" />
+                            <a-switch v-model:checked="basicFormState.search" />
                         </a-form-item>
                     </a-col>
                     <a-col :span="8">
                         <a-form-item label="内容居中" name="alignCenter">
-                            <a-switch v-model:checked="formState.alignCenter" />
+                            <a-switch v-model:checked="basicFormState.alignCenter" />
                         </a-form-item>
                     </a-col>
                     <a-col :span="8">
                         <a-form-item label="格式化内容" name="formatterValue">
-                            <a-switch v-model:checked="formState.formatterValue" />
+                            <a-switch v-model:checked="basicFormState.formatterValue" />
                         </a-form-item>
                     </a-col>
                     <a-col :span="8">
                         <a-form-item label="显示序号" name="showSerialNumber">
-                            <a-switch v-model:checked="formState.showSerialNumber" />
+                            <a-switch v-model:checked="basicFormState.showSerialNumber" />
                         </a-form-item>
                     </a-col>
                 </a-row>
@@ -47,6 +49,8 @@
         <a-card title="columns配置">
             <a-form
                 ref="columnsRef"
+                name="columnsForm"
+                autocomplete="off"
                 :label-col="{ span: 6 }"
                 :wrapper-col="{ span: 18, offset: 0 }"
                 :model="columnsFormState"
@@ -84,54 +88,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, ComputedRef, onMounted, reactive } from 'vue';
-import { baseElementTableString, BaseElementTableConfigForm, ColumnsForm } from './string';
-import { baseRules } from '@/utils/rule';
+import { computed, ComputedRef } from 'vue';
+import { baseElementTableString } from '../index';
+import { basicFormState, basicFormRules } from './basicForm';
+import columnsForm from './columnsForm';
 
-/** onMounted */
-onMounted(() => {
-    // console.log('onMounted');
-});
-
-const formState = reactive<BaseElementTableConfigForm>({
-    ref: 'table',
-    search: true,
-    alignCenter: true,
-    formatterValue: true,
-    showSerialNumber: false,
-});
-const formRules = reactive({
-    // ref: [baseRules.required('组件引用名称')],
-    // alignCenter: [baseRules.requireChange('是否居中')],
-    // showSerialNumber: [baseRules.requireChange('是否显示序号')],
-});
-
-const columnsRef = ref();
-const columnsFormState = reactive<ColumnsForm>({
-    label: '',
-    prop: '',
-    width: '',
-});
-const columnsFormRules = reactive({
-    label: [baseRules.required('表格标题')],
-    prop: [baseRules.required('表格属性')],
-    width: [baseRules.required('表格宽度'), baseRules.nums()],
-});
-const columns: Array<ColumnsForm> = [];
-const addColumns = (): void => {
-    columnsRef.value
-        .validate()
-        .then((result: ColumnsForm) => {
-            columns.push(result);
-        })
-        .catch((err: any) => console.log(err));
-};
-const resetColumns = (): void => {
-    columnsRef.value.resetFields();
-};
+const { columnsRef, columnsFormState, columnsFormRules, columns, addColumns, resetColumns } = columnsForm();
 
 const code: ComputedRef = computed(() => {
-    return baseElementTableString(formState);
+    return baseElementTableString(basicFormState, columns);
 });
 </script>
 
