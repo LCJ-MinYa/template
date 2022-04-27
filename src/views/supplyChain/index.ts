@@ -1,11 +1,12 @@
 /*
  * @Author: LiChaoJun
  * @Date: 2022-04-20 17:38:17
- * @LastEditTime: 2022-04-26 18:02:07
+ * @LastEditTime: 2022-04-27 15:50:51
  * @LastEditors: LiChaoJun
  * @Description: 模板string
  */
 import { replaceEmptyLine } from '@/utils/util';
+import { CODE_NEW_LINE_REPLACE_LOGO } from '@/utils/dictionary';
 interface BasicForm {
     ref?: string;
     search?: boolean;
@@ -21,7 +22,6 @@ interface ColumnsForm extends anyObjectType {
 }
 
 const baseElementTableString = (basicForm: BasicForm, columns: Array<ColumnsForm>): string => {
-    console.log(columns);
     const { ref, search, formatterValue, alignCenter, showSerialNumber } = basicForm;
     const str = `\
 <template>
@@ -31,11 +31,13 @@ const baseElementTableString = (basicForm: BasicForm, columns: Array<ColumnsForm
         ${alignCenter ? 'alignCenter' : ''}
         ${formatterValue ? 'formatterValue' : ''}
         ${showSerialNumber ? 'showSerialNumber' : ''}
+        :columns="columns"
+        :data="dataSource"
     >
-
+${CODE_NEW_LINE_REPLACE_LOGO}
     </base-element-table>
 </template>
-##
+${CODE_NEW_LINE_REPLACE_LOGO}
 <script>
 import { BaseElementTable } from '@/components';
 export default {
@@ -45,12 +47,22 @@ export default {
     },
     data() {
         return {
-
+            columns: [
+                ${columns.map((item) => {
+                    return `
+                {
+                    label: '${item.label}',
+                    prop: '${item.prop}',
+                    width: '${item.width}',
+                }`;
+                })}
+            ],
+            dataSource: [],
         }
     },
 }
 </script>
-##
+${CODE_NEW_LINE_REPLACE_LOGO}
 <style lang="less" scoped>
 </style>
 `;

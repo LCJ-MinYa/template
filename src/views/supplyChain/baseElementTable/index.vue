@@ -1,7 +1,7 @@
 <!--
  * @Author: LiChaoJun
  * @Date: 2022-04-18 11:13:31
- * @LastEditTime: 2022-04-26 17:31:14
+ * @LastEditTime: 2022-04-27 16:58:05
  * @LastEditors: LiChaoJun
  * @Description: baseElementTable模板
 -->
@@ -46,7 +46,7 @@
             </a-form>
         </a-card>
 
-        <a-card title="columns配置">
+        <a-card title="columns配置" class="margin-bottom-20">
             <a-form
                 ref="columnsRef"
                 name="columnsForm"
@@ -81,9 +81,17 @@
                 </a-space>
             </a-row>
         </a-card>
-        <pre v-highlight>
-            <code class="javascript">{{ code }}</code>
-        </pre>
+
+        <a-card title="代码展现">
+            <pre v-highlight>
+                <code class="javascript">{{ code }}</code>
+            </pre>
+            <a-row justify="start">
+                <a-space>
+                    <a-button class="copy" type="primary" @click="copyCode">复制</a-button>
+                </a-space>
+            </a-row>
+        </a-card>
     </a-card>
 </template>
 
@@ -92,11 +100,28 @@ import { computed, ComputedRef } from 'vue';
 import { baseElementTableString } from '../index';
 import { basicFormState, basicFormRules } from './basicForm';
 import columnsForm from './columnsForm';
+import clipboardJS from 'clipboard';
+import { message } from 'ant-design-vue';
+import { codeNewLineReplaceLogo } from '@/utils/util';
 
 const { columnsRef, columnsFormState, columnsFormRules, columns, addColumns, resetColumns } = columnsForm();
 
 const code: ComputedRef = computed(() => {
     return baseElementTableString(basicFormState, columns);
 });
+
+const copyCode = () => {
+    const clipboard = new clipboardJS('.copy', {
+        text: () => codeNewLineReplaceLogo(code.value),
+    });
+    clipboard.on('success', () => {
+        clipboard.destroy();
+        message.success('复制成功');
+    });
+    clipboard.on('error', () => {
+        clipboard.destroy();
+        message.error('复制失败');
+    });
+};
 </script>
 

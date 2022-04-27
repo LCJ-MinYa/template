@@ -1,7 +1,7 @@
 /*
  * @Author: LiChaoJun
  * @Date: 2022-04-26 17:24:49
- * @LastEditTime: 2022-04-26 17:34:10
+ * @LastEditTime: 2022-04-27 16:54:58
  * @LastEditors: LiChaoJun
  * @Description: Columns配置
  */
@@ -9,7 +9,7 @@ import { ref, reactive } from 'vue';
 import { ColumnsForm } from '../index';
 import { baseRules } from '@/utils/rule';
 
-export default function columnsForm() {
+export default function columnsForm(): anyObjectType {
     const columnsRef = ref();
 
     const columnsFormState = reactive<ColumnsForm>({
@@ -24,14 +24,13 @@ export default function columnsForm() {
         width: [baseRules.required('表格宽度'), baseRules.nums()],
     });
 
-    const columns: Array<ColumnsForm> = [];
+    const columns: Array<ColumnsForm> = reactive([]);
 
     const addColumns = (): void => {
         columnsRef.value
             .validate()
             .then((result: ColumnsForm) => {
                 columns.push(result);
-                console.log(columns);
             })
             .catch(() => console.log('error'));
     };
