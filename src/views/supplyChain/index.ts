@@ -1,7 +1,7 @@
 /*
  * @Author: LiChaoJun
  * @Date: 2022-04-20 17:38:17
- * @LastEditTime: 2022-04-27 15:50:51
+ * @LastEditTime: 2022-04-28 10:37:05
  * @LastEditors: LiChaoJun
  * @Description: 模板string
  */
@@ -13,16 +13,21 @@ interface BasicForm {
     alignCenter?: boolean;
     formatterValue?: boolean;
     showSerialNumber?: boolean;
+    requestApi?: string;
 }
 
 interface ColumnsForm extends anyObjectType {
     label: string;
     prop: string;
-    width: string;
+    width: number | '';
+    align?: string | undefined;
+    showOverflowTooltip?: boolean;
+    searchOrder?: number | '';
+    searchType?: string | undefined;
 }
 
 const baseElementTableString = (basicForm: BasicForm, columns: Array<ColumnsForm>): string => {
-    const { ref, search, formatterValue, alignCenter, showSerialNumber } = basicForm;
+    const { ref, search, formatterValue, alignCenter, showSerialNumber, requestApi } = basicForm;
     const str = `\
 <template>
     <base-element-table
@@ -33,6 +38,7 @@ const baseElementTableString = (basicForm: BasicForm, columns: Array<ColumnsForm
         ${showSerialNumber ? 'showSerialNumber' : ''}
         :columns="columns"
         :data="dataSource"
+        requestApi="${requestApi}"
     >
 ${CODE_NEW_LINE_REPLACE_LOGO}
     </base-element-table>
@@ -41,7 +47,7 @@ ${CODE_NEW_LINE_REPLACE_LOGO}
 <script>
 import { BaseElementTable } from '@/components';
 export default {
-    name: 'InventoryAllocation',
+    name: 'baseElementTable',
     components: {
         BaseElementTable,
     },
@@ -53,7 +59,11 @@ export default {
                 {
                     label: '${item.label}',
                     prop: '${item.prop}',
-                    width: '${item.width}',
+                    width: ${item.width},
+                    ${item.align ? `align: '${item.align}'` : ''}
+                    ${!item.showOverflowTooltip ? 'showOverflowTooltip: false' : ''}
+                    ${item.searchOrder ? `searchOrder: ${item.searchOrder}` : ''}
+                    ${item.searchType ? `searchType: '${item.searchType}'` : ''}
                 }`;
                 })}
             ],

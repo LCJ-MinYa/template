@@ -1,7 +1,7 @@
 /*
  * @Author: LiChaoJun
  * @Date: 2022-04-26 17:22:48
- * @LastEditTime: 2022-04-26 17:28:45
+ * @LastEditTime: 2022-04-27 17:44:10
  * @LastEditors: LiChaoJun
  * @Description: 基本信息配置
  */
@@ -15,6 +15,7 @@ const basicFormState = reactive<BasicForm>({
     alignCenter: true,
     formatterValue: true,
     showSerialNumber: false,
+    requestApi: '',
 });
 
 const basicFormRules = reactive({
